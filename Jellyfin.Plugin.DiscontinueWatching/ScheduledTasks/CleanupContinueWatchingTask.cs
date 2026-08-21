@@ -70,12 +70,12 @@ public class CleanupContinueWatchingTask : IScheduledTask
 
         _logger.LogInformation("Cleaning up items not watched since {ThresholdDate} (threshold: {Days} days)", thresholdDate, daysThreshold);
 
-        var users = _userManager.Users.ToList();
-        var totalUsers = users.Count;
+        var userIds = _userManager.UsersIds.ToList();
+        var totalUsers = userIds.Count;
         var processedUsers = 0;
         var totalItemsHidden = 0;
 
-        foreach (var user in users)
+        foreach (var userId in userIds)
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -85,6 +85,12 @@ public class CleanupContinueWatchingTask : IScheduledTask
 
             try
             {
+                var user = _userManager.GetUserById(userId);
+                if (user == null)
+                {
+                    continue;
+                }
+
                 _logger.LogDebug("Processing user {UserId}: {UserName}", user.Id, user.Username);
 
                 var itemsHidden = await ProcessUserContinueWatching(user.Id, thresholdDate, cancellationToken).ConfigureAwait(false);
@@ -98,7 +104,7 @@ public class CleanupContinueWatchingTask : IScheduledTask
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error processing user {UserId}", user.Id);
+                _logger.LogError(ex, "Error processing user {UserId}", userId);
             }
         }
 
