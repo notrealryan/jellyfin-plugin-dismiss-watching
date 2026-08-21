@@ -8,6 +8,14 @@
     "category": "General",
     "versions": [
       {
+        "version": "0.5.2.0",
+        "changelog": "- See the full changelog at [GitHub](https://github.com/Razdnut/jellyfin-plugin-discontinue-watching/releases/tag/v0.5.2)\n",
+        "targetAbi": "10.11.0.0",
+        "sourceUrl": "https://github.com/Razdnut/jellyfin-plugin-discontinue-watching/releases/download/v0.5.2/jellyfin-plugin-discontinue-watching-0.5.2.zip",
+        "checksum": "b24626f963811e3329c7ee46ac9c3006",
+        "timestamp": "2026-08-21T17:28:26Z"
+      },
+      {
         "version": "0.5.3.0",
         "changelog": "- See the full changelog at [GitHub](https://github.com/Razdnut/jellyfin-plugin-discontinue-watching/releases/tag/v0.5.3)\n",
         "targetAbi": "10.11.0.0",
