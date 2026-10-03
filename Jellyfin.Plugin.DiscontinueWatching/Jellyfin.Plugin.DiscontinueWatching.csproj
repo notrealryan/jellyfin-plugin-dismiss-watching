@@ -24,7 +24,7 @@
     <Authors>jon4hz</Authors>
     <Description>A Jellyfin plugin for Dismiss Watching</Description>
     <PackageLicenseExpression>GPL-3.0</PackageLicenseExpression>
-    <RepositoryUrl>https://github.com/notrealryan/jellyfin-plugin-discontinue-watching-nextup</RepositoryUrl>
+    <RepositoryUrl>https://github.com/notrealryan/jellyfin-plugin-dismiss-watching</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 

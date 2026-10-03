@@ -17,7 +17,7 @@ The buttons and client-side filtering work in Jellyfin Web. They may also work i
 2. Add this repository URL:
 
    ```text
-   https://raw.githubusercontent.com/notrealryan/jellyfin-plugin-discontinue-watching-nextup/main/manifest.json
+   https://raw.githubusercontent.com/notrealryan/jellyfin-plugin-dismiss-watching/main/manifest.json
    ```
 
 3. Install **Dismiss Watching** from the catalog.
