@@ -1,133 +1,64 @@
-# jellyfin-plugin-dismiss-watching
+# Dismiss Watching
 
-## ✨ About
+Dismiss items from Jellyfin's **Continue Watching** and **Next Up** rows without resetting their playback progress.
 
-This plugin lets you remove items from the "Continue Watching" list in Jellyfin without resetting the watch progress.
-The plugin can also automatically hide items after a configurable period of inactivity.
+Each user's dismissals are private. Starting playback again removes the item from that user's denylist.
 
-> It implements [this feature request](https://features.jellyfin.org/posts/517/add-an-option-to-remove-an-item-from-continue-watching)
+## Requirements
 
-## 📱 Supported Devices
+- Jellyfin 12.0 or newer
+- [Jellyfin JavaScript Injector](https://github.com/n00bcodr/Jellyfin-JavaScript-Injector)
 
-This plugin works by injecting custom JavaScript into Jellyfin's web interface. It is compatible with:
+The buttons and client-side filtering work in Jellyfin Web. They may also work in official apps that use Jellyfin Web, but they are not supported in native or third-party clients.
 
-- ✅ **Jellyfin Web**
-- ✅ **Jellyfin Android App**
-- ✅ **Jellyfin iOS App**
-- ✅ **Jellyfin Desktop Apps**
-- ❌ **Other 3rd party apps**
+## Installation
 
-## 📦 Installation
+1. In Jellyfin, open **Dashboard** → **Plugins** → **Catalog** → **Settings**.
+2. Add this repository URL:
 
-### Requirements
-
-This plugin requires the following plugins to be installed:
-
-- [Jellyfin-JavaScript-Injector](https://github.com/n00bcodr/Jellyfin-JavaScript-Injector)
-- [jellyfin-plugin-file-transformation](https://github.com/IAmParadox27/jellyfin-plugin-file-transformation) (optional, but recommended)
-
-### Install Plugin
-
-1. Open your Jellyfin server's admin dashboard
-2. Navigate to **Plugins** → **Catalog**
-3. Click the **Add Repository** button
-4. Add this repository URL:
+   ```text
+   https://raw.githubusercontent.com/notrealryan/jellyfin-plugin-discontinue-watching-nextup/main/manifest.json
    ```
-   https://raw.githubusercontent.com/jon4hz/jellyfin-plugin-dismiss-watching/main/manifest.json
-   ```
-5. Find **Dismiss Watching** in the plugin catalog and install it
-6. Restart your Jellyfin server
-7. Enable the plugin in **Plugins** → **My Plugins**
 
-## ⚙️ Custom Routes
+3. Install **Dismiss Watching** from the catalog.
+4. Restart Jellyfin, then enable the plugin under **My Plugins**.
+5. Hard refresh Jellyfin Web (`Ctrl` + `Shift` + `R`).
 
-This plugin has a custom route that simulate the "Resume" endpoints but filters out unwanted items.
-Configure your reverse proxy accordingly to make every client support this plugin.
+Hover the upper-right corner of a Continue Watching or Next Up card to reveal its × button.
 
-### Treafik Example
+## What it does
 
-```yaml
----
-http:
-  middlewares:
-    dismiss-watching:
-      replacePathRegex:
-        regex: '^/UserItems/Resume'
-        replacement: '/DismissWatching/Override/UserItems/Resume'
----
-http:
-  middlewares:
-    dismiss-watching-old:
-      replacePathRegex:
-        regex: '^/Users/([^/]+)/Items/Resume'
-        replacement: '/DismissWatching/Override/Users/$1/Items/Resume'
+- **Continue Watching:** hides the selected item while retaining playback progress.
+- **Next Up:** hides all currently listed episodes for the selected show.
+- **Per-user lists:** each Jellyfin account has its own dismiss list, managed from the plugin's **User Lists** page.
+
+## Limitations
+
+- The dismiss buttons are injected into the web interface. Native and third-party clients do not receive them.
+- Next Up is filtered in the web interface only; its server API is not overridden.
+- The **JavaScript Injector** plugin must be installed and enabled before Dismiss Watching starts.
+
+## API
+
+Authenticated clients can use the following endpoints:
+
+```text
+GET    /DismissWatching/Items
+POST   /DismissWatching/Items/{itemId}
+DELETE /DismissWatching/Items/{itemId}
+GET    /DismissWatching/Config
 ```
 
-### Nginx Example
+The original Continue Watching server-side override endpoints remain available for advanced reverse-proxy setups. Most users do not need them.
 
-```nginx
-location ~ ^/UserItems/Resume {
-    rewrite ^/UserItems/Resume /DismissWatching/Override/UserItems/Resume break;
-    proxy_pass http://jellyfin_backend;
-}
+## Development
 
-location ~ ^/Users/([^/]+)/Items/Resume {
-    rewrite ^/Users/([^/]+)/Items/Resume /DismissWatching/Override/Users/$1/Items/Resume break;
-    proxy_pass http://jellyfin_backend;
-}
-```
-
-## 🔌 Integrate this plugin!
-
-This plugin can be easily integrated in other 3rd party clients.
-
-### API Routes
-
-```
-
-GET /Dismiss Watching
-
-# returns an array of item ID which should be hidden from Continue Watching for the current user
-
-```
-
-```
-
-POST /DismissWatching/{itemId}
-
-# adds the specified item ID to the denylist for the current user
-
-```
-
-With these routes, other clients can remove items from Continue Watching by calling the POST route.
-The items returned by the GET route should be hidden from Continue Watching list.
-
-## 🛠️ Development
-
-### Building
-
-```
-
+```text
 make build
-
 ```
 
-### Contributing
+Releases are built through GitHub Actions. Run **Build and Release Plugin** with a semantic version such as `1.0.1`.
 
-All kind of contributions are welcome! Feel free to open issues or submit pull requests.
-If you want to contribute code, please make sure to install the pre-commit hooks:
+## Credits and license
 
-```
-
-pre-commit install
-
-```
-
-## 🥂 Credits
-
-- [KefinTweaks](https://github.com/ranaldsgift/KefinTweaks) - for giving me the idea to write a dedicated plugin for this feature. (and also for helping with some javascript struggles)
-- [jellyfin-plugin-streamyfin](https://github.com/streamyfin/jellyfin-plugin-streamyfin) - from whom I've borrowed some code snippets for the configuration page.
-
-## 📜 License
-
-GPLv3
+This project is derived from [jon4hz's Discontinue Watching plugin](https://github.com/jon4hz/jellyfin-plugin-discontinue-watching), with prior work from [Razdnut's fork](https://github.com/Razdnut/jellyfin-plugin-discontinue-watching). It is licensed under [GPL-3.0](LICENSE).
