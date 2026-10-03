@@ -32,7 +32,7 @@ Hover the upper-right corner of a Continue Watching or Next Up card to reveal it
 - **Next Up:** hides all currently listed episodes for the selected show.
 - **Per-user lists:** each Jellyfin account has its own dismiss list, managed from the plugin's **User Lists** page.
 <img width="795" height="302" alt="image" src="https://github.com/user-attachments/assets/963fd16e-862b-42fb-8601-d25232a8337b" />
-<img width="1456" height="311" alt="image" src="https://github.com/user-attachments/assets/d0bfbe77-4e76-4902-9f9a-488622779c75" />
+<img width="1461" height="319" alt="image" src="https://github.com/user-attachments/assets/bd355913-4383-47b9-8789-f9d201c559c9" />
 
 
 ## Limitations
