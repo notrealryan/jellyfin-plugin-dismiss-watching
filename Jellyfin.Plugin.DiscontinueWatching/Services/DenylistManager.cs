@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace Jellyfin.Plugin.DiscontinueWatching.Services;
+namespace Jellyfin.Plugin.DismissWatching.Services;
 
 /// <summary>
 /// Manages the user-specific denylist for items to hide from Continue Watching.
@@ -16,7 +16,7 @@ public class DenylistManager(ILogger<DenylistManager> logger)
     /// <param name="itemId">The item ID to add to the denylist.</param>
     public void AddToUserDenylist(Guid userId, string itemId)
     {
-        var config = DiscontinueWatchingPlugin.Instance?.Configuration;
+        var config = DismissWatchingPlugin.Instance?.Configuration;
         if (config == null)
         {
             _logger.LogError("Plugin configuration is not available");
@@ -30,7 +30,7 @@ public class DenylistManager(ILogger<DenylistManager> logger)
             if (!itemList.Contains(itemId))
             {
                 itemList.Add(itemId);
-                DiscontinueWatchingPlugin.Instance?.SaveConfiguration();
+                DismissWatchingPlugin.Instance?.SaveConfiguration();
                 _logger.LogInformation("Added item {ItemId} to denylist for user {UserId}", itemId, userId);
             }
             else
@@ -47,7 +47,7 @@ public class DenylistManager(ILogger<DenylistManager> logger)
     /// <param name="itemId">The item ID to remove from the denylist.</param>
     public void RemoveFromUserDenylist(Guid userId, string itemId)
     {
-        var config = DiscontinueWatchingPlugin.Instance?.Configuration;
+        var config = DismissWatchingPlugin.Instance?.Configuration;
         if (config == null)
         {
             _logger.LogError("Plugin configuration is not available");
@@ -66,7 +66,7 @@ public class DenylistManager(ILogger<DenylistManager> logger)
                         config.UserDenylists.TryRemove(userId, out _);
                     }
 
-                    DiscontinueWatchingPlugin.Instance?.SaveConfiguration();
+                    DismissWatchingPlugin.Instance?.SaveConfiguration();
                     _logger.LogInformation("Removed item {ItemId} from denylist for user {UserId}", itemId, userId);
                 }
                 else
@@ -88,7 +88,7 @@ public class DenylistManager(ILogger<DenylistManager> logger)
     /// <returns>A list of item IDs in the user's denylist.</returns>
     public IReadOnlyList<string> GetUserDenylist(Guid userId)
     {
-        var config = DiscontinueWatchingPlugin.Instance?.Configuration;
+        var config = DismissWatchingPlugin.Instance?.Configuration;
         if (config == null)
         {
             _logger.LogError("Plugin configuration is not available");
@@ -114,7 +114,7 @@ public class DenylistManager(ILogger<DenylistManager> logger)
     /// <returns>True if the item is in the denylist; otherwise, false.</returns>
     public bool IsItemInUserDenylist(Guid userId, string itemId)
     {
-        var config = DiscontinueWatchingPlugin.Instance?.Configuration;
+        var config = DismissWatchingPlugin.Instance?.Configuration;
         if (config == null)
         {
             return false;

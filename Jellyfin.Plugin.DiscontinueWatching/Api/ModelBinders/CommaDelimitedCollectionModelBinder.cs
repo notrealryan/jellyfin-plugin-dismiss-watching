@@ -2,7 +2,7 @@ using System.ComponentModel;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
 
-namespace Jellyfin.Plugin.DiscontinueWatching.Api.ModelBinders;
+namespace Jellyfin.Plugin.DismissWatching.Api.ModelBinders;
 
 /// <summary>
 /// Comma delimited collection model binder.

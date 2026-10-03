@@ -27,7 +27,7 @@ jobs:
 
       - name: Test Build Output
         run: |
-          if [ ! -f "Jellyfin.Plugin.DiscontinueWatching/bin/Release/net9.0/Jellyfin.Plugin.DiscontinueWatching.dll" ]; then
+          if [ ! -f "Jellyfin.Plugin.DiscontinueWatching/bin/Release/net9.0/Jellyfin.Plugin.DismissWatching.dll" ]; then
             echo "Build failed - DLL not found"
             exit 1
           fi

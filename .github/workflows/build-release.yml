@@ -44,7 +44,7 @@ jobs:
           # Ensure version does not have leading 'v'
           VERSION="${RAW_VERSION#v}"
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "package-name=jellyfin-plugin-discontinue-watching-$VERSION.zip" >> $GITHUB_OUTPUT
+          echo "package-name=jellyfin-plugin-dismiss-watching-$VERSION.zip" >> $GITHUB_OUTPUT
           echo "Building version: $VERSION"
 
       - name: Update Version

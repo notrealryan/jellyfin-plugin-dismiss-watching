@@ -4,9 +4,9 @@ using Jellyfin.Data;
 using Jellyfin.Data.Enums;
 using Jellyfin.Database.Implementations.Enums;
 using Jellyfin.Extensions;
-using Jellyfin.Plugin.DiscontinueWatching.Api.Extensions;
-using Jellyfin.Plugin.DiscontinueWatching.Api.ModelBinders;
-using Jellyfin.Plugin.DiscontinueWatching.Services;
+using Jellyfin.Plugin.DismissWatching.Api.Extensions;
+using Jellyfin.Plugin.DismissWatching.Api.ModelBinders;
+using Jellyfin.Plugin.DismissWatching.Services;
 using MediaBrowser.Controller.Dto;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Library;
@@ -19,17 +19,17 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Jellyfin.Plugin.DiscontinueWatching.Api;
+namespace Jellyfin.Plugin.DismissWatching.Api;
 
 /// <summary>
 /// API controller for managing the Continue Watching denylist.
 /// </summary>
 [ApiController]
-[Route("DiscontinueWatching")]
+[Route("DismissWatching")]
 [Authorize]
-public class DiscontinueWatchingController : ControllerBase
+public class DismissWatchingController : ControllerBase
 {
-    private readonly ILogger<DiscontinueWatchingController> _logger;
+    private readonly ILogger<DismissWatchingController> _logger;
     private readonly DenylistManager _denylistManager;
     private readonly IUserManager _userManager;
     private readonly ILibraryManager _libraryManager;
@@ -37,7 +37,7 @@ public class DiscontinueWatchingController : ControllerBase
     private readonly ISessionManager _sessionManager;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="DiscontinueWatchingController"/> class.
+    /// Initializes a new instance of the <see cref="DismissWatchingController"/> class.
     /// </summary>
     /// <param name="logger">The logger.</param>
     /// <param name="denylistManager">The denylist manager.</param>
@@ -46,8 +46,8 @@ public class DiscontinueWatchingController : ControllerBase
     /// <param name="dtoService">Instance of the <see cref="IDtoService"/> interface.</param>
     /// <param name="sessionManager">Instance of the <see cref="ISessionManager"/> interface.</param>
     ///
-    public DiscontinueWatchingController(
-        ILogger<DiscontinueWatchingController> logger,
+    public DismissWatchingController(
+        ILogger<DismissWatchingController> logger,
         DenylistManager denylistManager,
         IUserManager userManager,
         ILibraryManager libraryManager,
@@ -146,7 +146,7 @@ public class DiscontinueWatchingController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public ActionResult<object> GetConfig()
     {
-        var config = DiscontinueWatchingPlugin.Instance?.Configuration;
+        var config = DismissWatchingPlugin.Instance?.Configuration;
         return Ok(new
         {
             EnableFrontendFiltering = config?.EnableFrontendFiltering ?? true

@@ -2,7 +2,7 @@
 
 # Default target
 help:
-	@echo "Jellyfin Plugin DiscontinueWatching - Build System"
+	@echo "Jellyfin Plugin Dismiss Watching - Build System"
 	@echo ""
 	@echo "Available targets:"
 	@echo "  build      - Build the plugin (Release configuration)"
@@ -40,7 +40,7 @@ restore:
 
 test: build
 	@echo "Testing build output..."
-	@if [ ! -f "Jellyfin.Plugin.DiscontinueWatching/bin/Release/net9.0/Jellyfin.Plugin.DiscontinueWatching.dll" ]; then \
+	@if [ ! -f "Jellyfin.Plugin.DiscontinueWatching/bin/Release/net9.0/Jellyfin.Plugin.DismissWatching.dll" ]; then \
 		echo "Build test failed - DLL not found"; \
 		exit 1; \
 	fi
@@ -64,25 +64,25 @@ endif
 # Installation
 install: package
 	@echo "Installing plugin to local Jellyfin..."
-	sudo mkdir -p /var/lib/jellyfin/plugins/DiscontinueWatching
-	sudo cp bin/plugin/*.dll /var/lib/jellyfin/plugins/DiscontinueWatching/
+	sudo mkdir -p /var/lib/jellyfin/plugins/Dismiss Watching
+	sudo cp bin/plugin/*.dll /var/lib/jellyfin/plugins/DismissWatching/
 	@echo "Plugin installed. Restart Jellyfin to load the updated plugin."
 	@echo "To restart Jellyfin: sudo systemctl restart jellyfin"
 
 # Development helpers
 dev-install: debug
 	@echo "Installing debug build to local Jellyfin..."
-	sudo mkdir -p /var/lib/jellyfin/plugins/DiscontinueWatching
-	sudo cp Jellyfin.Plugin.DiscontinueWatching/bin/Debug/net9.0/Jellyfin.Plugin.DiscontinueWatching.dll /var/lib/jellyfin/plugins/DiscontinueWatching/
+	sudo mkdir -p /var/lib/jellyfin/plugins/Dismiss Watching
+	sudo cp Jellyfin.Plugin.DiscontinueWatching/bin/Debug/net9.0/Jellyfin.Plugin.DismissWatching.dll /var/lib/jellyfin/plugins/DismissWatching/
 	# Copy Humanizer dependency for debug builds
 	@if [ -f "Jellyfin.Plugin.DiscontinueWatching/bin/Debug/net9.0/Humanizer.dll" ]; then \
-		sudo cp Jellyfin.Plugin.DiscontinueWatching/bin/Debug/net9.0/Humanizer.dll /var/lib/jellyfin/plugins/DiscontinueWatching/; \
+		sudo cp Jellyfin.Plugin.DiscontinueWatching/bin/Debug/net9.0/Humanizer.dll /var/lib/jellyfin/plugins/DismissWatching/; \
 	fi
 	@echo "Debug plugin installed. Restart Jellyfin to load the updated plugin."
 
 uninstall:
 	@echo "Removing plugin from local Jellyfin..."
-	sudo rm -rf /var/lib/jellyfin/plugins/DiscontinueWatching
+	sudo rm -rf /var/lib/jellyfin/plugins/Dismiss Watching
 	@echo "Plugin removed. Restart Jellyfin to complete removal."
 
 # CI/CD helpers

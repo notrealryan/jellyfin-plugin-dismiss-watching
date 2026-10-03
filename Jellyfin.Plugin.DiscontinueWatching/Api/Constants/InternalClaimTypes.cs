@@ -1,4 +1,4 @@
-namespace Jellyfin.Plugin.DiscontinueWatching.Api.Constants;
+namespace Jellyfin.Plugin.DismissWatching.Api.Constants;
 
 /// <summary>
 /// Internal claim types for authorization.

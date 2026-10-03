@@ -1,8 +1,8 @@
 /**
- * Shared utilities for Discontinue Watching plugin configuration pages
+ * Shared utilities for Dismiss Watching plugin configuration pages
  */
 
-export const PLUGIN_ID = '74a22212-e4c5-4b5c-8d77-04e7e220f28d';
+export const PLUGIN_ID = 'd4af5c47-69e0-47b7-84cc-1b556b76f98a';
 
 // region private variables
 let config = undefined;
@@ -35,18 +35,18 @@ export const getUsers = () => users;
 
 // region helpers
 export const setPage = resource => {
-  const tabs = DiscontinueWatchingTabs();
+  const tabs = DismissWatchingTabs();
 
   const index = tabs.findIndex(tab => tab.resource === resource);
 
   if (index === -1) {
-    console.error(`[DiscontinueWatching] Failed to find tab for ${resource}`);
+    console.error(`[Dismiss Watching] Failed to find tab for ${resource}`);
     return;
   }
 
-  console.log(`[DiscontinueWatching] ${tabs[index].name} loaded`);
+  console.log(`[Dismiss Watching] ${tabs[index].name} loaded`);
 
-  LibraryMenu.setTabs(tabs[index].resource, index, DiscontinueWatchingTabs);
+  LibraryMenu.setTabs(tabs[index].resource, index, DismissWatchingTabs);
 };
 
 export const loadConfiguration = () => {
@@ -59,7 +59,7 @@ export const loadConfiguration = () => {
       return loadedConfig;
     })
     .catch(function (error) {
-      console.error('[DiscontinueWatching] Error loading configuration:', error);
+      console.error('[Dismiss Watching] Error loading configuration:', error);
       Dashboard.hideLoadingMsg();
       throw error;
     });
@@ -77,7 +77,7 @@ export const saveConfiguration = newConfig => {
       return result;
     })
     .catch(function (error) {
-      console.error('[DiscontinueWatching] Error saving configuration:', error);
+      console.error('[Dismiss Watching] Error saving configuration:', error);
       Dashboard.hideLoadingMsg();
       throw error;
     });
@@ -87,7 +87,7 @@ export const loadUsers = () => {
   return ApiClient.getUsers().then(function (loadedUsers) {
     users = {};
     loadedUsers.forEach(function (user) {
-      console.log(`[DiscontinueWatching] Loaded user: ${user.Name} (${user.Id})`);
+      console.log(`[Dismiss Watching] Loaded user: ${user.Name} (${user.Id})`);
       // add dashes back to guid
       const guidWithDashes = user.Id.replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, '$1-$2-$3-$4-$5');
       users[guidWithDashes] = user.Name;
@@ -101,7 +101,7 @@ export const keyedEventListener = (el, type, listener) => {
   const elId = el.getAttribute('id');
 
   if (!elId) {
-    console.warn('[DiscontinueWatching] Element has no id, cannot register keyed listener');
+    console.warn('[Dismiss Watching] Element has no id, cannot register keyed listener');
     el.addEventListener(type, listener);
     return;
   }
@@ -115,7 +115,7 @@ export const keyedEventListener = (el, type, listener) => {
   }
 };
 
-export const DiscontinueWatchingTabs = () => [
+export const DismissWatchingTabs = () => [
   {
     href: 'configurationpage?name=Settings',
     resource: 'Settings',

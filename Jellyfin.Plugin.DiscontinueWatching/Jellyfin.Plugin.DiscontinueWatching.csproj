@@ -4,7 +4,8 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>Jellyfin.Plugin.DiscontinueWatching</RootNamespace>
+    <RootNamespace>Jellyfin.Plugin.DismissWatching</RootNamespace>
+    <AssemblyName>Jellyfin.Plugin.DismissWatching</AssemblyName>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
@@ -18,12 +19,12 @@
     <PluginVersion>1.0.0.0</PluginVersion>
 
     <!-- Package Information -->
-    <PackageId>Jellyfin.Plugin.DiscontinueWatching</PackageId>
-    <Title>DiscontinueWatching</Title>
+    <PackageId>Jellyfin.Plugin.DismissWatching</PackageId>
+    <Title>Dismiss Watching</Title>
     <Authors>jon4hz</Authors>
-    <Description>A Jellyfin plugin for DiscontinueWatching</Description>
+    <Description>A Jellyfin plugin for Dismiss Watching</Description>
     <PackageLicenseExpression>GPL-3.0</PackageLicenseExpression>
-    <RepositoryUrl>https://github.com/jon4hz/jellyfin-plugin-discontinue-watching</RepositoryUrl>
+    <RepositoryUrl>https://github.com/notrealryan/jellyfin-plugin-discontinue-watching-nextup</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
@@ -38,6 +39,8 @@
   <ItemGroup>
     <None Remove="Web\discontinue-watching.js" />
     <EmbeddedResource Include="Web\discontinue-watching.js" />
+    <None Remove="Web\nextup-dismiss.js" />
+    <EmbeddedResource Include="Web\nextup-dismiss.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,7 +52,7 @@
   <Target Name="CreatePluginPackage" AfterTargets="Publish" Condition="'$(Configuration)' == 'Release'">
     <PropertyGroup>
       <PluginDir>$(MSBuildProjectDirectory)/../bin/plugin</PluginDir>
-      <PluginArchive>$(MSBuildProjectDirectory)/../bin/jellyfin-plugin-discontinue-watching-$(PluginVersion).zip</PluginArchive>
+      <PluginArchive>$(MSBuildProjectDirectory)/../bin/jellyfin-plugin-dismiss-watching-$(PluginVersion).zip</PluginArchive>
     </PropertyGroup>
 
     <!-- Include only specific DLLs we want in the plugin package -->

@@ -1,108 +1,11 @@
 [
-  {
-    "guid": "74a22212-e4c5-4b5c-8d77-04e7e220f28d",
-    "name": "DiscontinueWatching",
-    "overview": "Hide items from the Continue Watching list",
-    "description": "DiscontinueWatching hides items from the Continue Watching list in Jellyfin, helping you keep your watchlist clean and relevant.",
-    "owner": "jon4hz",
-    "category": "General",
-    "versions": [
-      {
-        "version": "0.5.6.0",
-        "changelog": "- See the full changelog at [GitHub](https://github.com/Razdnut/jellyfin-plugin-discontinue-watching/releases/tag/v0.5.6)\n",
-        "targetAbi": "10.11.0.0",
-        "sourceUrl": "https://github.com/Razdnut/jellyfin-plugin-discontinue-watching/releases/download/v0.5.6/jellyfin-plugin-discontinue-watching-0.5.6.zip",
-        "checksum": "c41977c970ac5740b07a55c7b67cf8a0",
-        "timestamp": "2026-08-21T17:55:46Z"
-      },
-      {
-        "version": "0.5.5.0",
-        "changelog": "- See the full changelog at [GitHub](https://github.com/Razdnut/jellyfin-plugin-discontinue-watching/releases/tag/v0.5.5)\n",
-        "targetAbi": "10.11.0.0",
-        "sourceUrl": "https://github.com/Razdnut/jellyfin-plugin-discontinue-watching/releases/download/v0.5.5/jellyfin-plugin-discontinue-watching-0.5.5.zip",
-        "checksum": "7dfb6120ea94b9360750f765b74bab05",
-        "timestamp": "2026-08-21T17:46:20Z"
-      },
-      {
-        "version": "0.5.4.0",
-        "changelog": "- See the full changelog at [GitHub](https://github.com/Razdnut/jellyfin-plugin-discontinue-watching/releases/tag/v0.5.4)\n",
-        "targetAbi": "10.11.0.0",
-        "sourceUrl": "https://github.com/Razdnut/jellyfin-plugin-discontinue-watching/releases/download/v0.5.4/jellyfin-plugin-discontinue-watching-0.5.4.zip",
-        "checksum": "148523f2ec8ffcef5d9ec6bd0f719fb5",
-        "timestamp": "2026-08-21T17:31:33Z"
-      },
-      {
-        "version": "0.5.2.0",
-        "changelog": "- See the full changelog at [GitHub](https://github.com/Razdnut/jellyfin-plugin-discontinue-watching/releases/tag/v0.5.2)\n",
-        "targetAbi": "10.11.0.0",
-        "sourceUrl": "https://github.com/Razdnut/jellyfin-plugin-discontinue-watching/releases/download/v0.5.2/jellyfin-plugin-discontinue-watching-0.5.2.zip",
-        "checksum": "b24626f963811e3329c7ee46ac9c3006",
-        "timestamp": "2026-08-21T17:28:26Z"
-      },
-      {
-        "version": "0.5.3.0",
-        "changelog": "- See the full changelog at [GitHub](https://github.com/Razdnut/jellyfin-plugin-discontinue-watching/releases/tag/v0.5.3)\n",
-        "targetAbi": "10.11.0.0",
-        "sourceUrl": "https://github.com/Razdnut/jellyfin-plugin-discontinue-watching/releases/download/v0.5.3/jellyfin-plugin-discontinue-watching-0.5.3.zip",
-        "checksum": "fe471ef38aca7a43724cbae6a4581f3d",
-        "timestamp": "2026-08-21T17:16:24Z"
-      },
-      {
-        "version": "0.5.1.0",
-        "changelog": "- See the full changelog at [GitHub](https://github.com/jon4hz/jellyfin-plugin-discontinue-watching/releases/tag/v0.5.1)\n",
-        "targetAbi": "10.11.0.0",
-        "sourceUrl": "https://github.com/jon4hz/jellyfin-plugin-discontinue-watching/releases/download/v0.5.1/jellyfin-plugin-discontinue-watching-0.5.1.zip",
-        "checksum": "016ab0e789ba85d60a2f760d85aacd12",
-        "timestamp": "2025-12-07T22:33:03Z"
-      },
-      {
-        "version": "0.5.0.0",
-        "changelog": "- See the full changelog at [GitHub](https://github.com/jon4hz/jellyfin-plugin-discontinue-watching/releases/tag/v0.5.0)\n",
-        "targetAbi": "10.11.0.0",
-        "sourceUrl": "https://github.com/jon4hz/jellyfin-plugin-discontinue-watching/releases/download/v0.5.0/jellyfin-plugin-discontinue-watching-0.5.0.zip",
-        "checksum": "56d4b0331f4687f6f4a5b2badb6c0cfe",
-        "timestamp": "2025-12-07T22:08:11Z"
-      },
-      {
-        "version": "0.4.0.0",
-        "changelog": "- See the full changelog at [GitHub](https://github.com/jon4hz/jellyfin-plugin-discontinue-watching/releases/tag/v0.4.0)\n",
-        "targetAbi": "10.11.0.0",
-        "sourceUrl": "https://github.com/jon4hz/jellyfin-plugin-discontinue-watching/releases/download/v0.4.0/jellyfin-plugin-discontinue-watching-0.4.0.zip",
-        "checksum": "8f2c15726699685f3d6ef8cfccc7cc99",
-        "timestamp": "2025-11-23T17:33:49Z"
-      },
-      {
-        "version": "0.2.1.0",
-        "changelog": "- See the full changelog at [GitHub](https://github.com/jon4hz/jellyfin-plugin-discontinue-watching/releases/tag/v0.2.1)\n",
-        "targetAbi": "10.11.0.0",
-        "sourceUrl": "https://github.com/jon4hz/jellyfin-plugin-discontinue-watching/releases/download/v0.2.1/jellyfin-plugin-discontinue-watching-0.2.1.zip",
-        "checksum": "9f482df7b050b9017b5edb003f493e0c",
-        "timestamp": "2025-11-20T22:49:14Z"
-      },
-      {
-        "version": "0.2.0.0",
-        "changelog": "- See the full changelog at [GitHub](https://github.com/jon4hz/jellyfin-plugin-discontinue-watching/releases/tag/v0.2.0)\n",
-        "targetAbi": "10.11.0.0",
-        "sourceUrl": "https://github.com/jon4hz/jellyfin-plugin-discontinue-watching/releases/download/v0.2.0/jellyfin-plugin-discontinue-watching-0.2.0.zip",
-        "checksum": "d4b541bd83ae5d2b0ffacd22b1578e5d",
-        "timestamp": "2025-11-20T22:02:34Z"
-      },
-      {
-        "version": "0.1.1.0",
-        "changelog": "- See the full changelog at [GitHub](https://github.com/jon4hz/jellyfin-plugin-discontinue-watching/releases/tag/v0.1.1)\n",
-        "targetAbi": "10.11.0.0",
-        "sourceUrl": "https://github.com/jon4hz/jellyfin-plugin-discontinue-watching/releases/download/v0.1.1/jellyfin-plugin-discontinue-watching-0.1.1.zip",
-        "checksum": "3034eff674f3a10c109a576249d10dce",
-        "timestamp": "2025-11-20T21:32:53Z"
-      },
-      {
-        "version": "0.1.0.0",
-        "changelog": "- See the full changelog at [GitHub](https://github.com/jon4hz/jellyfin-plugin-discontinue-watching/releases/tag/v0.1.0)\n",
-        "targetAbi": "10.11.0.0",
-        "sourceUrl": "https://github.com/jon4hz/jellyfin-plugin-discontinue-watching/releases/download/v0.1.0/jellyfin-plugin-discontinue-watching-0.1.0.zip",
-        "checksum": "3c5536b123c9369bad122792d43e16d4",
-        "timestamp": "2025-11-20T21:16:14Z"
-      }
-    ]
-  }
+{
+  "guid": "d4af5c47-69e0-47b7-84cc-1b556b76f98a",
+  "name": "Dismiss Watching",
+  "overview": "Dismiss items from Continue Watching and Next Up",
+  "description": "Dismiss Watching adds per-user dismiss buttons to Jellyfin Web Continue Watching and Next Up rows without resetting playback progress.",
+  "owner": "notrealryan",
+  "category": "General",
+  "versions": []
+}
 ]

@@ -5,7 +5,7 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 using MediaBrowser.Model.Plugins;
 
-namespace Jellyfin.Plugin.DiscontinueWatching.Configuration;
+namespace Jellyfin.Plugin.DismissWatching.Configuration;
 
 /// <summary>
 /// Plugin configuration.

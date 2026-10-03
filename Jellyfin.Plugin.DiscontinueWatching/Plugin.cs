@@ -1,6 +1,6 @@
 using System.Reflection;
 using System.Runtime.Loader;
-using Jellyfin.Plugin.DiscontinueWatching.Configuration;
+using Jellyfin.Plugin.DismissWatching.Configuration;
 using MediaBrowser.Common.Configuration;
 using MediaBrowser.Common.Plugins;
 using MediaBrowser.Controller.Configuration;
@@ -9,24 +9,24 @@ using MediaBrowser.Model.Serialization;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
-namespace Jellyfin.Plugin.DiscontinueWatching;
+namespace Jellyfin.Plugin.DismissWatching;
 
 /// <summary>
 /// The main plugin.
 /// </summary>
-public class DiscontinueWatchingPlugin : BasePlugin<PluginConfiguration>, IHasWebPages
+public class DismissWatchingPlugin : BasePlugin<PluginConfiguration>, IHasWebPages
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="DiscontinueWatchingPlugin"/> class.
+    /// Initializes a new instance of the <see cref="DismissWatchingPlugin"/> class.
     /// </summary>
     /// <param name="applicationPaths">Instance of the <see cref="IApplicationPaths"/> interface.</param>
     /// <param name="xmlSerializer">Instance of the <see cref="IXmlSerializer"/> interface.</param>
     /// <param name="logger">Instance of the <see cref="ILogger{T}"/> interface.</param>
     /// <param name="configurationManager">Instance of the <see cref="IServerConfigurationManager"/> interface.</param>
-    public DiscontinueWatchingPlugin(
+    public DismissWatchingPlugin(
         IApplicationPaths applicationPaths,
         IXmlSerializer xmlSerializer,
-        ILogger<DiscontinueWatchingPlugin> logger,
+        ILogger<DismissWatchingPlugin> logger,
         IServerConfigurationManager configurationManager)
         : base(applicationPaths, xmlSerializer)
     {
@@ -48,19 +48,26 @@ public class DiscontinueWatchingPlugin : BasePlugin<PluginConfiguration>, IHasWe
 
             if (jsInjectorAssembly != null)
             {
-                var customScriptPath = $"{Assembly.GetExecutingAssembly().GetName().Name}.Web.discontinue-watching.js";
-                var scriptStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(customScriptPath);
-                if (scriptStream == null)
+                var assembly = Assembly.GetExecutingAssembly();
+                var scriptPaths = new[]
                 {
-                    _logger.LogError("Could not find embedded DiscontinueWatching script at path: {Path}", customScriptPath);
-                    return;
-                }
+                    $"{assembly.GetName().Name}.Web.discontinue-watching.js",
+                    $"{assembly.GetName().Name}.Web.nextup-dismiss.js"
+                };
+                var scriptParts = new List<string>();
+                foreach (var customScriptPath in scriptPaths)
+                {
+                    using var scriptStream = assembly.GetManifestResourceStream(customScriptPath);
+                    if (scriptStream == null)
+                    {
+                        _logger.LogError("Could not find embedded Dismiss Watching script at path: {Path}", customScriptPath);
+                        return;
+                    }
 
-                string scriptContent;
-                using (var reader = new StreamReader(scriptStream))
-                {
-                    scriptContent = reader.ReadToEnd();
+                    using var reader = new StreamReader(scriptStream);
+                    scriptParts.Add(reader.ReadToEnd());
                 }
+                var scriptContent = string.Join("\n\n", scriptParts);
 
                 // Get the PluginInterface type
                 Type? pluginInterfaceType = jsInjectorAssembly.GetType("Jellyfin.Plugin.JavaScriptInjector.PluginInterface");
@@ -74,7 +81,7 @@ public class DiscontinueWatchingPlugin : BasePlugin<PluginConfiguration>, IHasWe
                 var scriptRegistration = new JObject
                 {
                             { "id", $"{Id}-script" },
-                            { "name", "DiscontinueWatching Client Script" },
+                            { "name", "Dismiss Watching Client Script" },
                             { "script", scriptContent },
                             { "enabled", true },
                             { "requiresAuthentication", true },
@@ -143,18 +150,18 @@ public class DiscontinueWatchingPlugin : BasePlugin<PluginConfiguration>, IHasWe
         base.OnUninstalling();
     }
 
-    private readonly ILogger<DiscontinueWatchingPlugin> _logger;
+    private readonly ILogger<DismissWatchingPlugin> _logger;
 
     /// <inheritdoc />
-    public override string Name => "DiscontinueWatching";
+    public override string Name => "Dismiss Watching";
 
     /// <inheritdoc />
-    public override Guid Id => Guid.Parse("74a22212-e4c5-4b5c-8d77-04e7e220f28d");
+    public override Guid Id => Guid.Parse("d4af5c47-69e0-47b7-84cc-1b556b76f98a");
 
     /// <summary>
     /// Gets the current plugin instance.
     /// </summary>
-    public static DiscontinueWatchingPlugin? Instance { get; private set; }
+    public static DismissWatchingPlugin? Instance { get; private set; }
 
 
 

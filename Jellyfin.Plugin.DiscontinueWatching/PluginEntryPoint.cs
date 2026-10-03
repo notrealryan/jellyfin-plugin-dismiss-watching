@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Jellyfin.Plugin.DiscontinueWatching;
+namespace Jellyfin.Plugin.DismissWatching;
 
 /// <summary>
 /// Plugin entry point that runs when the server starts.
@@ -22,9 +22,9 @@ public sealed class PluginEntryPoint : IHostedService
     /// <inheritdoc />
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        _logger.LogInformation("DiscontinueWatching plugin is starting");
+        _logger.LogInformation("Dismiss Watching plugin is starting");
 
-        DiscontinueWatchingPlugin.Instance?.RegisterJavascript();
+        DismissWatchingPlugin.Instance?.RegisterJavascript();
 
         return Task.CompletedTask;
     }

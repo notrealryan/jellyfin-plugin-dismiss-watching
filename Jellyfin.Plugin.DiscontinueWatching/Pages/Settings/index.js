@@ -12,14 +12,14 @@ export default function (view, params) {
 
       // Set up config update listener
       shared.setOnConfigUpdatedListener('settings', config => {
-        console.log('[DiscontinueWatching] Updating settings DOM');
+        console.log('[Dismiss Watching] Updating settings DOM');
         document.getElementById('daysThreshold').value = config.DaysThreshold || 180;
         document.getElementById('enableFrontendFiltering').checked =
           config.EnableFrontendFiltering !== undefined ? config.EnableFrontendFiltering : true;
       });
 
       // Handle form submission
-      shared.keyedEventListener(document.querySelector('#DiscontinueWatchingSettingsForm'), 'submit', function (e) {
+      shared.keyedEventListener(document.querySelector('#Dismiss WatchingSettingsForm'), 'submit', function (e) {
         e.preventDefault();
 
         const config = shared.getConfig();

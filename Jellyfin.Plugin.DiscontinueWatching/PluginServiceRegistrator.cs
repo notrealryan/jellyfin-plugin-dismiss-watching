@@ -1,6 +1,6 @@
-using Jellyfin.Plugin.DiscontinueWatching.EventHandlers;
-using Jellyfin.Plugin.DiscontinueWatching.ScheduledTasks;
-using Jellyfin.Plugin.DiscontinueWatching.Services;
+using Jellyfin.Plugin.DismissWatching.EventHandlers;
+using Jellyfin.Plugin.DismissWatching.ScheduledTasks;
+using Jellyfin.Plugin.DismissWatching.Services;
 using MediaBrowser.Controller;
 using MediaBrowser.Controller.Events;
 using MediaBrowser.Controller.Library;
@@ -8,10 +8,10 @@ using MediaBrowser.Controller.Plugins;
 using MediaBrowser.Model.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Jellyfin.Plugin.DiscontinueWatching;
+namespace Jellyfin.Plugin.DismissWatching;
 
 /// <summary>
-/// Register discontinue watching services.
+/// Register dismiss watching services.
 /// </summary>
 public class PluginServiceRegistrator : IPluginServiceRegistrator
 {

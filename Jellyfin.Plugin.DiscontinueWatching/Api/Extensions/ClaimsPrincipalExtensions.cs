@@ -1,7 +1,7 @@
 using System.Security.Claims;
-using Jellyfin.Plugin.DiscontinueWatching.Api.Constants;
+using Jellyfin.Plugin.DismissWatching.Api.Constants;
 
-namespace Jellyfin.Plugin.DiscontinueWatching.Api.Extensions;
+namespace Jellyfin.Plugin.DismissWatching.Api.Extensions;
 
 /// <summary>
 /// Extensions for <see cref="ClaimsPrincipal"/>.

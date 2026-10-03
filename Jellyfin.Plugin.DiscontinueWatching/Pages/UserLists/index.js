@@ -97,7 +97,7 @@ const removeItemFromUserDenylist = (userId, itemId, itemDiv, detailsElement, sha
         }
       })
       .catch(error => {
-        console.error('[DiscontinueWatching] Error removing item:', error);
+        console.error('[Dismiss Watching] Error removing item:', error);
         Dashboard.hideLoadingMsg();
         Dashboard.alert('Error removing item from denylist');
       });
@@ -108,7 +108,7 @@ const loadUserDenylists = shared => {
   const container = document.getElementById('userDenylistsContainer');
 
   if (!container) {
-    console.error('[DiscontinueWatching] userDenylistsContainer not found in DOM');
+    console.error('[Dismiss Watching] userDenylistsContainer not found in DOM');
     return;
   }
 
@@ -141,7 +141,7 @@ const loadUserDenylists = shared => {
       });
     })
     .catch(function (error) {
-      console.error('[DiscontinueWatching] Error loading user denylists:', error);
+      console.error('[Dismiss Watching] Error loading user denylists:', error);
       container.innerHTML = '<p style="color: red;">Error loading user denylists: ' + (error.message || error) + '</p>';
     });
 };

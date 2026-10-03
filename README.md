@@ -1,4 +1,4 @@
-# jellyfin-plugin-discontinue-watching
+# jellyfin-plugin-dismiss-watching
 
 ## ✨ About
 
@@ -33,9 +33,9 @@ This plugin requires the following plugins to be installed:
 3. Click the **Add Repository** button
 4. Add this repository URL:
    ```
-   https://raw.githubusercontent.com/jon4hz/jellyfin-plugin-discontinue-watching/main/manifest.json
+   https://raw.githubusercontent.com/jon4hz/jellyfin-plugin-dismiss-watching/main/manifest.json
    ```
-5. Find **Discontinue Watching** in the plugin catalog and install it
+5. Find **Dismiss Watching** in the plugin catalog and install it
 6. Restart your Jellyfin server
 7. Enable the plugin in **Plugins** → **My Plugins**
 
@@ -50,29 +50,29 @@ Configure your reverse proxy accordingly to make every client support this plugi
 ---
 http:
   middlewares:
-    discontinue-watching:
+    dismiss-watching:
       replacePathRegex:
         regex: '^/UserItems/Resume'
-        replacement: '/DiscontinueWatching/Override/UserItems/Resume'
+        replacement: '/DismissWatching/Override/UserItems/Resume'
 ---
 http:
   middlewares:
-    discontinue-watching-old:
+    dismiss-watching-old:
       replacePathRegex:
         regex: '^/Users/([^/]+)/Items/Resume'
-        replacement: '/DiscontinueWatching/Override/Users/$1/Items/Resume'
+        replacement: '/DismissWatching/Override/Users/$1/Items/Resume'
 ```
 
 ### Nginx Example
 
 ```nginx
 location ~ ^/UserItems/Resume {
-    rewrite ^/UserItems/Resume /DiscontinueWatching/Override/UserItems/Resume break;
+    rewrite ^/UserItems/Resume /DismissWatching/Override/UserItems/Resume break;
     proxy_pass http://jellyfin_backend;
 }
 
 location ~ ^/Users/([^/]+)/Items/Resume {
-    rewrite ^/Users/([^/]+)/Items/Resume /DiscontinueWatching/Override/Users/$1/Items/Resume break;
+    rewrite ^/Users/([^/]+)/Items/Resume /DismissWatching/Override/Users/$1/Items/Resume break;
     proxy_pass http://jellyfin_backend;
 }
 ```
@@ -85,7 +85,7 @@ This plugin can be easily integrated in other 3rd party clients.
 
 ```
 
-GET /DiscontinueWatching
+GET /Dismiss Watching
 
 # returns an array of item ID which should be hidden from Continue Watching for the current user
 
@@ -93,7 +93,7 @@ GET /DiscontinueWatching
 
 ```
 
-POST /DiscontinueWatching/{itemId}
+POST /DismissWatching/{itemId}
 
 # adds the specified item ID to the denylist for the current user
 

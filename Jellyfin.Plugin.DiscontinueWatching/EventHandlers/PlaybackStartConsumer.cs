@@ -1,10 +1,10 @@
-using Jellyfin.Plugin.DiscontinueWatching.Services;
+using Jellyfin.Plugin.DismissWatching.Services;
 using MediaBrowser.Controller.Events;
 using MediaBrowser.Controller.Library;
 using MediaBrowser.Controller.Session;
 using Microsoft.Extensions.Logging;
 
-namespace Jellyfin.Plugin.DiscontinueWatching.EventHandlers;
+namespace Jellyfin.Plugin.DismissWatching.EventHandlers;
 
 /// <summary>
 /// Handles playback start events to remove items from denylist when resumed.

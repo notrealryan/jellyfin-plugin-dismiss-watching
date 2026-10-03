@@ -1,9 +1,9 @@
-using Jellyfin.Plugin.DiscontinueWatching.Services;
+using Jellyfin.Plugin.DismissWatching.Services;
 using MediaBrowser.Controller.Library;
 using MediaBrowser.Model.Tasks;
 using Microsoft.Extensions.Logging;
 
-namespace Jellyfin.Plugin.DiscontinueWatching.ScheduledTasks;
+namespace Jellyfin.Plugin.DismissWatching.ScheduledTasks;
 
 /// <summary>
 /// Scheduled task to clean up non-existent items from user denylists.
@@ -34,20 +34,20 @@ public class CleanupDenylistTask : IScheduledTask
     public string Name => "Clean Up Denylist";
 
     /// <inheritdoc />
-    public string Key => "DiscontinueWatchingDenylistCleanup";
+    public string Key => "Dismiss WatchingDenylistCleanup";
 
     /// <inheritdoc />
     public string Description => "Removes items from user denylists that no longer exist on the server.";
 
     /// <inheritdoc />
-    public string Category => "DiscontinueWatching";
+    public string Category => "Dismiss Watching";
 
     /// <inheritdoc />
     public Task ExecuteAsync(IProgress<double> progress, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Starting denylist cleanup task");
 
-        var config = DiscontinueWatchingPlugin.Instance?.Configuration;
+        var config = DismissWatchingPlugin.Instance?.Configuration;
         if (config == null)
         {
             _logger.LogError("Plugin configuration is not available");

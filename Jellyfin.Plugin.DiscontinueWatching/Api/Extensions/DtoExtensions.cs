@@ -3,7 +3,7 @@ using MediaBrowser.Controller.Dto;
 using MediaBrowser.Model.Entities;
 using MediaBrowser.Model.Querying;
 
-namespace Jellyfin.Plugin.DiscontinueWatching.Api.Extensions;
+namespace Jellyfin.Plugin.DismissWatching.Api.Extensions;
 
 /// <summary>
 /// Dto Extensions.

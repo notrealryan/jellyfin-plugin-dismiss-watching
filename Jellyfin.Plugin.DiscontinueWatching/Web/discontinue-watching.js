@@ -1,16 +1,16 @@
 /**
- * The discontinue-watching plugin brings "remove from continue watching" functionality to Jellyfin.
+ * The dismiss-watching plugin brings "remove from continue watching" functionality to Jellyfin.
  */
 
 (function () {
   'use strict';
 
-  console.log('[DiscontinueWatching] Initializing...');
+  console.log('[Dismiss Watching] Initializing...');
 
   // Add CSS for the remove button
   const style = document.createElement('style');
   style.textContent = `
-    .discontinue-watching-button {
+    .dismiss-watching-button {
       position: absolute !important;
       top: 8px !important;
       right: 8px !important;
@@ -29,23 +29,23 @@
       transform: scale(0.8) !important;
     }
 
-    .cardOverlayContainer:hover .discontinue-watching-button {
+    .cardOverlayContainer:hover .dismiss-watching-button {
       opacity: 1 !important;
       transform: scale(1) !important;
     }
 
-    .discontinue-watching-button:hover {
+    .dismiss-watching-button:hover {
       background: rgba(220, 38, 38, 0.9) !important;
       transform: scale(1.1) !important;
     }
 
-    .discontinue-watching-button:disabled {
+    .dismiss-watching-button:disabled {
       opacity: 0.6 !important;
       cursor: not-allowed !important;
       transform: scale(0.9) !important;
     }
 
-    .discontinue-watching-button .material-icons {
+    .dismiss-watching-button .material-icons {
       color: white !important;
       font-size: 18px !important;
     }
@@ -64,11 +64,11 @@
    * Make API calls to the plugin backend
    */
   function callPluginAPI(action, data) {
-    console.log(`[DiscontinueWatching] API Call - Action: ${action}`, data);
+    console.log(`[Dismiss Watching] API Call - Action: ${action}`, data);
 
     // Check if ApiClient is available
     if (!window.ApiClient || !window.ApiClient.accessToken || !window.ApiClient.accessToken()) {
-      console.error('[DiscontinueWatching] ApiClient not available or no access token');
+      console.error('[Dismiss Watching] ApiClient not available or no access token');
       return Promise.reject(new Error('ApiClient not available'));
     }
 
@@ -76,7 +76,7 @@
 
     switch (action) {
       case 'getConfig':
-        return fetch(`${baseUrl}/DiscontinueWatching/Config`, {
+        return fetch(`${baseUrl}/DismissWatching/Config`, {
           headers: {
             Authorization: `MediaBrowser Token="${window.ApiClient.accessToken()}"`,
           },
@@ -88,12 +88,12 @@
             return response.json();
           })
           .catch(error => {
-            console.error('[DiscontinueWatching] Error getting config:', error);
+            console.error('[Dismiss Watching] Error getting config:', error);
             throw error;
           });
 
       case 'getDenylist':
-        return fetch(`${baseUrl}/DiscontinueWatching/Items`, {
+        return fetch(`${baseUrl}/DismissWatching/Items`, {
           headers: {
             Authorization: `MediaBrowser Token="${window.ApiClient.accessToken()}"`,
           },
@@ -105,12 +105,12 @@
             return response.json();
           })
           .catch(error => {
-            console.error('[DiscontinueWatching] Error getting denylist:', error);
+            console.error('[Dismiss Watching] Error getting denylist:', error);
             throw error;
           });
 
       case 'addToDenylist':
-        return fetch(`${baseUrl}/DiscontinueWatching/Items/${data.itemId}`, {
+        return fetch(`${baseUrl}/DismissWatching/Items/${data.itemId}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -124,12 +124,12 @@
             return response;
           })
           .catch(error => {
-            console.error('[DiscontinueWatching] Error adding to denylist:', error);
+            console.error('[Dismiss Watching] Error adding to denylist:', error);
             throw error;
           });
 
       default:
-        console.warn(`[DiscontinueWatching] Unknown API action: ${action}`);
+        console.warn(`[Dismiss Watching] Unknown API action: ${action}`);
         return Promise.reject(new Error(`Unknown API action: ${action}`));
     }
   }
@@ -139,12 +139,12 @@
    */
   async function loadConfig() {
     try {
-      console.log('[DiscontinueWatching] Loading plugin configuration');
+      console.log('[Dismiss Watching] Loading plugin configuration');
       const config = await callPluginAPI('getConfig');
       pluginConfig.enableFrontendFiltering = config.EnableFrontendFiltering ?? true;
-      console.log('[DiscontinueWatching] Frontend filtering enabled:', pluginConfig.enableFrontendFiltering);
+      console.log('[Dismiss Watching] Frontend filtering enabled:', pluginConfig.enableFrontendFiltering);
     } catch (error) {
-      console.error('[DiscontinueWatching] Error loading config:', error);
+      console.error('[Dismiss Watching] Error loading config:', error);
       pluginConfig.enableFrontendFiltering = true;
     }
   }
@@ -154,11 +154,11 @@
    */
   async function loadDenylist() {
     try {
-      console.log('[DiscontinueWatching] Loading denylist');
+      console.log('[Dismiss Watching] Loading denylist');
       const items = await callPluginAPI('getDenylist');
       denylist = new Set(items);
     } catch (error) {
-      console.error('[DiscontinueWatching] Error loading denylist:', error);
+      console.error('[Dismiss Watching] Error loading denylist:', error);
       denylist = new Set();
     }
   }
@@ -186,14 +186,14 @@
    */
   function addRemoveButton(overlayContainer) {
     // Check if button already exists
-    if (overlayContainer && overlayContainer.querySelector('.discontinue-watching-button')) {
+    if (overlayContainer && overlayContainer.querySelector('.dismiss-watching-button')) {
       return;
     }
 
     // Find the card parent to get the item ID
     const card = overlayContainer.closest('.card');
     if (!card) {
-      console.warn('[DiscontinueWatching] Could not find card parent for overlay container');
+      console.warn('[Dismiss Watching] Could not find card parent for overlay container');
       return;
     }
 
@@ -205,21 +205,21 @@
 
     const itemId = card.getAttribute('data-id');
     if (!itemId) {
-      console.warn('[DiscontinueWatching] Could not find data-id on card element');
+      console.warn('[Dismiss Watching] Could not find data-id on card element');
       return;
     }
 
     // Find the .cardOverlayButton-br container to position our button before it
     const buttonContainer = overlayContainer.querySelector('.cardOverlayButton-br');
     if (!buttonContainer) {
-      console.warn('[DiscontinueWatching] Could not find .cardOverlayButton-br container');
+      console.warn('[Dismiss Watching] Could not find .cardOverlayButton-br container');
       return;
     }
 
     // Create remove button
     const removeButton = document.createElement('button');
     removeButton.type = 'button';
-    removeButton.className = 'discontinue-watching-button';
+    removeButton.className = 'dismiss-watching-button';
     removeButton.setAttribute('data-action', 'none');
     removeButton.setAttribute('data-id', itemId);
     removeButton.title = 'Remove from Continue Watching';
@@ -250,9 +250,9 @@
         // Remove the card from the DOM
         card.remove();
 
-        console.log(`[DiscontinueWatching] Successfully removed item ${itemId} from continue watching`);
+        console.log(`[Dismiss Watching] Successfully removed item ${itemId} from continue watching`);
       } catch (error) {
-        console.error('[DiscontinueWatching] Failed to remove from continue watching:', error);
+        console.error('[Dismiss Watching] Failed to remove from continue watching:', error);
 
         // Restore original state on error
         removeIcon.textContent = originalIcon;
@@ -266,7 +266,7 @@
     // Add the button as a sibling before the .cardOverlayButton-br container
     buttonContainer.parentNode.insertBefore(removeButton, buttonContainer);
 
-    console.log(`[DiscontinueWatching] Added remove button for item ${itemId}`);
+    console.log(`[Dismiss Watching] Added remove button for item ${itemId}`);
   }
 
   /**
@@ -364,7 +364,7 @@
       // Setup observer and update UI
       setupObserver();
     } catch (error) {
-      console.error('[DiscontinueWatching] ApiClient not available, initialization aborted:', error);
+      console.error('[Dismiss Watching] ApiClient not available, initialization aborted:', error);
     }
   }
 

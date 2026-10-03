@@ -1,13 +1,13 @@
 using System.Reflection;
 using Jellyfin.Data.Enums;
 using Jellyfin.Database.Implementations.Enums;
-using Jellyfin.Plugin.DiscontinueWatching.Services;
+using Jellyfin.Plugin.DismissWatching.Services;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Library;
 using MediaBrowser.Model.Tasks;
 using Microsoft.Extensions.Logging;
 
-namespace Jellyfin.Plugin.DiscontinueWatching.ScheduledTasks;
+namespace Jellyfin.Plugin.DismissWatching.ScheduledTasks;
 
 /// <summary>
 /// Scheduled task to clean up old items from Continue Watching.
@@ -46,20 +46,20 @@ public class CleanupContinueWatchingTask : IScheduledTask
     public string Name => "Clean Up Continue Watching";
 
     /// <inheritdoc />
-    public string Key => "DiscontinueWatchingCleanup";
+    public string Key => "Dismiss WatchingCleanup";
 
     /// <inheritdoc />
     public string Description => "Removes items from Continue Watching that haven't been watched in the configured threshold period.";
 
     /// <inheritdoc />
-    public string Category => "DiscontinueWatching";
+    public string Category => "Dismiss Watching";
 
     /// <inheritdoc />
     public async Task ExecuteAsync(IProgress<double> progress, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Starting Continue Watching cleanup task");
 
-        var config = DiscontinueWatchingPlugin.Instance?.Configuration;
+        var config = DismissWatchingPlugin.Instance?.Configuration;
         if (config == null)
         {
             _logger.LogError("Plugin configuration is not available");

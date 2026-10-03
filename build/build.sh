@@ -3,8 +3,9 @@
 set -euo pipefail
 
 # Configuration
-PLUGIN_NAME="Jellyfin.Plugin.DiscontinueWatching"
-SOLUTION_FILE="../${PLUGIN_NAME}.sln"
+PROJECT_DIR="Jellyfin.Plugin.DiscontinueWatching"
+SOLUTION_NAME="Jellyfin.Plugin.DiscontinueWatching"
+SOLUTION_FILE="../${SOLUTION_NAME}.sln"
 BUILD_DIR="../bin"
 
 # Colors for output
@@ -71,7 +72,7 @@ done
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
-log_info "Building Jellyfin Plugin: $PLUGIN_NAME"
+log_info "Building Jellyfin Plugin: $SOLUTION_NAME"
 log_info "Configuration: $CONFIGURATION"
 
 # Update version if provided
@@ -115,10 +116,10 @@ if [ "$PACKAGE" = true ]; then
 
     # Get version from project file
     if [ -z "$VERSION" ]; then
-        VERSION=$(grep -o '<PluginVersion>[^<]*</PluginVersion>' "../${PLUGIN_NAME}/${PLUGIN_NAME}.csproj" | sed 's/<[^>]*>//g')
+        VERSION=$(grep -o '<PluginVersion>[^<]*</PluginVersion>' "../${PROJECT_DIR}/${PROJECT_DIR}.csproj" | sed 's/<[^>]*>//g')
     fi
 
-    PACKAGE_NAME="jellyfin-plugin-discontinue-watching-${VERSION}.zip"
+    PACKAGE_NAME="jellyfin-plugin-dismiss-watching-${VERSION}.zip"
     PACKAGE_PATH="${BUILD_DIR}/${PACKAGE_NAME}"
 
     # The MSBuild target handles all the file filtering and packaging

@@ -42,7 +42,7 @@ sed -i "s|<FileVersion>.*</FileVersion>|<FileVersion>$ASSEMBLY_VERSION</FileVers
 sed -i "s|<PluginVersion>.*</PluginVersion>|<PluginVersion>$CLEAN_VERSION</PluginVersion>|g" "$PROJECT_FILE"
 
 # Update version in plugin script injection
-PLUGIN_FILE="$SCRIPT_DIR/../Jellyfin.Plugin.DiscontinueWatching/DiscontinueWatchingPlugin.cs"
+PLUGIN_FILE="$SCRIPT_DIR/../Jellyfin.Plugin.DiscontinueWatching/Plugin.cs"
 
 if [ -f "$PLUGIN_FILE" ]; then
     sed -i "s|version=\"[0-9.]*\"|version=\"$CLEAN_VERSION\"|g" "$PLUGIN_FILE"
