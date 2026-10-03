@@ -57,7 +57,7 @@ The original Continue Watching server-side override endpoints remain available f
 make build
 ```
 
-Releases are built through GitHub Actions. Run **Build and Release Plugin** with a semantic version such as `1.0.1`. Each release ZIP is attached to its GitHub Release page.
+Releases are built through GitHub Actions. Run **Build and Release Plugin** with a semantic version such as `1.0.1`.
 
 ## Credits and license
 
