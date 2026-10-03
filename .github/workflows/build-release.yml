@@ -62,6 +62,7 @@ jobs:
         with:
           name: plugin-package
           path: bin/${{ steps.get-version.outputs.package-name }}
+          if-no-files-found: error
           retention-days: 30
 
       - name: Upload Plugin Files
